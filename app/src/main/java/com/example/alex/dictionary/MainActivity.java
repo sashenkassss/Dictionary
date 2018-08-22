@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
        Words.Sort();
        listView = (ListView)findViewById(R.id.lvMain);
        BoxAdapter adapter = new BoxAdapter(this,Words.dictionary);
+
        listView.setAdapter(adapter);
        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                            @Override
