@@ -41,7 +41,7 @@ public class DataBaseHelper {
             do{
                 Type p = new Type(cursor.getString(wordIndex),cursor.getString(translateIndex),cursor.getInt(idIndex));
                 dictionary.add(p);
-            }while (cursor.moveToNext());
+            }while (cursor.moveToNext() );
         }
         cursor.close();
         return dictionary ;
