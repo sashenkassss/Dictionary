@@ -25,8 +25,8 @@ public class ChangeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_delete) {
-            //Words.Remove(MainActivity.position);
-            helper.remove(MainActivity.position);
+            Type type = Words.dictionary.get(MainActivity.position);
+            helper.remove(type.id);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -54,8 +54,10 @@ public class ChangeActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String Word = word.getText().toString();
                         String Translate = translate.getText().toString();
-                        Type type = new Type(Word, Translate);
-                        helper.change(type,String.valueOf(MainActivity.position));
+                        Type type = Words.dictionary.get(MainActivity.position);
+                        type.word=Word;
+                        type.translate=Translate;
+                        helper.change(type,String.valueOf(type.id));
                         //Words.Set(MainActivity.position,type);
                         Intent intent = new Intent(ChangeActivity.this, MainActivity.class);
                         startActivity(intent);

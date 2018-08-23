@@ -1,22 +1,16 @@
 package com.example.alex.dictionary;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
@@ -24,12 +18,13 @@ public class MainActivity extends AppCompatActivity {
     public static ListView listView ;
     public static int position;
     public static DataBaseHelper helper;
-
+    public static BoxAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Words.clear();
+        //Words.clear();
+        Log.d("mLog", "deleted rows count = ");
         helper= DataBaseHelper.getInstance(this);
         listView = (ListView)findViewById(R.id.lvMain);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -43,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                helper.remove(pos);
+                                Type p = Words.dictionary.get(pos);
+                                helper.remove(p.id);
                                 Update();
                                 dialogInterface.cancel();
                             }
@@ -64,22 +60,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
-        Words.clear();
-        Words.dictionary = helper.allElement();
+
         Update();
         super.onResume();
     }
 
     public void Update()
    {
-       Words.Sort();
+       Words.clear();
+       Words.dictionary = helper.allElement();
+       //Words.Sort();
        listView = (ListView)findViewById(R.id.lvMain);
-       BoxAdapter adapter = new BoxAdapter(this,Words.dictionary);
+       adapter = new BoxAdapter(this,helper.allElement());
        listView.setAdapter(adapter);
        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                            @Override
                                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                               Type p = Words.dictionary.get(i);
                                                position = i;
                                                Intent intent = new Intent(MainActivity.this,ChangeActivity.class);
                                                startActivity(intent);
@@ -93,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_add) {
           Intent intent = new Intent(this, AddWord.class);
           startActivity(intent);
-        }
+    }
+
 
         return super.onOptionsItemSelected(item);
     }

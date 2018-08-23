@@ -1,9 +1,6 @@
 package com.example.alex.dictionary;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,8 +29,8 @@ public class AddWord extends AppCompatActivity {
                     public void onClick(View view) {
                         String word = Word.getText().toString();
                         String translate = Translate.getText().toString();
-                        Type p = new Type(word,translate);
-                        helper.add(p);
+                        Type p = new Type(word,translate,1);
+                            helper.add(p);
                             Intent intent = new Intent(AddWord.this, MainActivity.class);
                             startActivity(intent);
 

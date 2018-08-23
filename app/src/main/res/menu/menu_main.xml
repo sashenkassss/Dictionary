@@ -8,4 +8,5 @@
         android:title="@string/action_add"
         android:icon="@drawable/ic_add_circle_black_24dp"
         app:showAsAction="always"/>
+
 </menu>

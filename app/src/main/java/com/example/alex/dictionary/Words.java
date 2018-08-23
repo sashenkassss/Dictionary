@@ -1,8 +1,6 @@
 package com.example.alex.dictionary;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Hashtable;
 
 public class Words {
     static ArrayList<Type> dictionary = new ArrayList<>();
