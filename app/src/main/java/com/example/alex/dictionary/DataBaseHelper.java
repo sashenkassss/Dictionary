@@ -44,7 +44,7 @@ public class DataBaseHelper {
             }while (cursor.moveToNext());
         }
         cursor.close();
-        return dictionary;
+        return dictionary ;
     }
     public void remove (int id){
         //database.delete(DBHelper.TABLE_CONTACTS, null, null);
