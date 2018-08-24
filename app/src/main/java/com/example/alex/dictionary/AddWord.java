@@ -59,7 +59,7 @@ public class AddWord extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-               String string = null;
+               String string = "dsdsfsd";
 
                 try {
                     string =JsonHelper.getJsonStringYandex("father");
