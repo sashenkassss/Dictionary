@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Words.clear();
-        Log.d("mLog", "deleted rows count = ");
         helper= DataBaseHelper.getInstance(this);
         listView = (ListView)findViewById(R.id.lvMain);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
